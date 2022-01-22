@@ -1,0 +1,74 @@
+@import '../../../../src/assets/styles';
+
+.bit-text {
+  font-size: inherit;
+  overflow-wrap: break-word;
+  @each $theme in dark, light {
+    &.#{$theme} {
+      color: map-get($themes, fore-color-main-#{$theme});
+      
+      code {
+        background-color: map-get($themes, background-code-#{$theme});
+        padding: 0.1rem 0.4rem;
+        border-radius: 0.5rem;
+        border: solid 0.1rem map-get($themes, code-border-#{$theme});
+        font-size: 80%;
+      }
+      
+      kbd {
+        background-color: map-get($themes, background-kbd-#{$theme});
+        padding: 0.1rem 0.4rem;
+        margin: 0 0.6rem 0 0.6rem;
+        top: -0.3rem;
+        border-radius: 0.4rem;
+        border: solid 0.1rem map-get($themes, kbd-border-#{$theme});
+        border-bottom-width: 0.3rem;
+        font-size: 80%;
+        font-weight: 600;
+      }
+      
+      strong {
+        font-weight: 600;
+      }
+      
+      em {
+      }
+      
+      del {
+        text-decoration: line-through;
+        text-decoration-skip-ink: auto;
+      }
+      
+      u {
+        text-decoration: underline;
+        text-decoration-skip-ink: auto;
+      }
+      
+      i {
+      }
+      
+      a {
+      }
+      
+      mark {
+        background-color: $orange-yellow-crayola-7;
+      }
+      
+      &.secondary {
+        color: map-get($themes, secondary-color-#{$theme});
+      }
+      
+      &.success {
+        color: map-get($themes, success-color-#{$theme});
+      }
+      
+      &.warning {
+        color: map-get($themes, warn-color-#{$theme});
+      }
+      
+      &.danger {
+        color: map-get($themes, danger-color-#{$theme});
+      }
+    }
+  }
+}

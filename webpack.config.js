@@ -1,48 +1,95 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+const path = require('path');
+const fs = require('fs');
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const isProduction = process.env.NODE_ENV === 'production';
 
-const isProduction = process.env.NODE_ENV == "production";
-
-const stylesHandler = "style-loader";
+const stylesHandler = 'style-loader';
 
 const config = {
-  entry: "./src/index.ts",
+  entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
   },
   devServer: {
     open: true,
-    host: "localhost",
+    host: 'localhost',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "index.html",
+    // new HtmlWebpackPlugin({
+    //   template: 'index.html',
+    // }),
+    new TerserPlugin({
+      terserOptions: {
+        parse: {
+          ecma: 8,
+        },
+        compress: {
+          ecma: 5,
+          warnings: false,
+          comparisons: false,
+          inline: 2,
+        },
+        mangle: {
+          safari10: true,
+        },
+        output: {
+          ecma: 5,
+          comments: false,
+          ascii_only: true,
+        },
+      },
     }),
-
-    // Add your plugins here
+    new ESLintPlugin({
+      extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      eslintPath: require.resolve('eslint'),
+      resolvePluginsRelativeTo: __dirname,
+      context: resolveApp('src'),
+      cache: true,
+      cwd: resolveApp('.'),
+      baseConfig: {
+        extends: [require.resolve('eslint-config-react-app/base')],
+        rules: {},
+      },
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/index.css',
+      chunkFilename: 'css/index.chunk,css',
+    }),
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/i,
-        loader: "ts-loader",
-        exclude: ["/node_modules/"],
+        include: resolveApp('src'),
+        loader: require.resolve('babel-loader'),
+        exclude: ['/node_modules/'],
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, "css-loader"],
+        use: [stylesHandler, 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [stylesHandler, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        type: 'asset',
       },
 
       // Add your rules for custom modules here
@@ -50,17 +97,26 @@ const config = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
   },
 };
 
 module.exports = () => {
   if (isProduction) {
-    config.mode = "production";
+    config.mode = 'production';
 
-    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+    // config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
   } else {
-    config.mode = "development";
+    config.mode = 'development';
   }
   return config;
 };

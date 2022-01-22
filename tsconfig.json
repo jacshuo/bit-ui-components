@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "ESNext",
     "target": "es5",
     "allowJs": true,
     "lib": [
@@ -19,7 +19,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "removeComments": true,
+    "declaration": true,
+    "declarationDir": "types",
     "jsx": "react-jsx",
+    "paths": {
+      "@": [
+        "src/**/*"
+      ],
+      "src": [
+        "src/**/*"
+      ]
+    }
   },
   "files": [
     "src/index.ts"
