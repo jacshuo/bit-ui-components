@@ -72,7 +72,7 @@ const config = {
       {
         test: /\.(ts|tsx)$/i,
         include: resolveApp('src'),
-        loader: require.resolve('babel-loader'),
+        use: [require.resolve('babel-loader'), 'ts-loader'],
         exclude: ['/node_modules/'],
       },
       {

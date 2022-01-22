@@ -18,17 +18,18 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "removeComments": true,
+    "baseUrl": ".",
     "declaration": true,
     "declarationDir": "types",
     "jsx": "react-jsx",
     "paths": {
       "@": [
-        "src/**/*"
+        "src/*"
       ],
       "src": [
-        "src/**/*"
+        "src/*"
       ]
     }
   },
