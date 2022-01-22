@@ -1,10 +1,16 @@
 {
-  "name": "bitui",
+  "name": "@jacshuo/bitui",
   "version": "0.0.1",
-  "description": "UI utilities.",
+  "description": "Bit-UI utilities.",
   "main": "index.js",
+  "private": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "keywords": [
     "UI",
@@ -12,5 +18,28 @@
     "frameworks"
   ],
   "author": "Wang,shuo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "classnames": "^2.3.1",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^2.4.1",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
+    "sass": "^1.49.0",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3",
+    "workbox-webpack-plugin": "^6.4.2"
+  }
 }
