@@ -1,0 +1,16 @@
+{
+  "name": "bitui",
+  "version": "0.0.1",
+  "description": "UI utilities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "UI",
+    "React",
+    "frameworks"
+  ],
+  "author": "Wang,shuo",
+  "license": "MIT"
+}
