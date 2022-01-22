@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
-
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const stylesHandler = 'style-loader';
 
 const config = {
@@ -65,6 +65,7 @@ const config = {
       filename: 'css/index.css',
       chunkFilename: 'css/index.chunk,css',
     }),
+    new CleanWebpackPlugin(),
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
   module: {
@@ -72,7 +73,7 @@ const config = {
       {
         test: /\.(ts|tsx)$/i,
         include: resolveApp('src'),
-        use: [require.resolve('babel-loader'), 'ts-loader'],
+        use: ['babel-loader', 'ts-loader'],
         exclude: ['/node_modules/'],
       },
       {
