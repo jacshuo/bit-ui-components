@@ -1,6 +1,6 @@
 {
   "name": "@jacshuo/bitui",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Bit-UI utilities.",
   "main": "./dist/index.js",
   "types": "index.d.ts",
