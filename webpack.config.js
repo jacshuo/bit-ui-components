@@ -9,7 +9,7 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const stylesHandler = 'style-loader';
@@ -28,27 +28,6 @@ const config = {
     // new HtmlWebpackPlugin({
     //   template: 'index.html',
     // }),
-    // new TerserPlugin({
-    //   terserOptions: {
-    //     parse: {
-    //       ecma: 8,
-    //     },
-    //     compress: {
-    //       ecma: 5,
-    //       warnings: false,
-    //       comparisons: false,
-    //       inline: 2,
-    //     },
-    //     mangle: {
-    //       safari10: true,
-    //     },
-    //     output: {
-    //       ecma: 5,
-    //       comments: false,
-    //       ascii_only: true,
-    //     },
-    //   },
-    // }),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       eslintPath: require.resolve('eslint'),
@@ -65,6 +44,7 @@ const config = {
       filename: 'css/index.css',
       chunkFilename: 'css/index.chunk,css',
     }),
+    // new TerserPlugin(),
     new CleanWebpackPlugin(),
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -74,7 +54,7 @@ const config = {
         test: /\.(ts|tsx)$/i,
         include: resolveApp('src'),
         exclude: ['/node_modules/'],
-        use: ['babel-loader'],
+        use: ['ts-loader'],
       },
       {
         test: /\.css$/i,

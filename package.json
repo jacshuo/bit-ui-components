@@ -28,16 +28,11 @@
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.10",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "@webpack-cli/generators": "^1.1.0",
-    "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.20.3",
     "css-loader": "^6.5.1",
@@ -63,6 +58,7 @@
   },
   "files": [
     "dist",
+    "types",
     "index.js",
     "README.md"
   ]
