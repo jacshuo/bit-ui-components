@@ -110,5 +110,3 @@ const Text: FC<ITextProps> = (props) => {
 };
 
 export default Text;
-;
-;

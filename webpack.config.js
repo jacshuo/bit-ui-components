@@ -9,7 +9,7 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
+const NpmDtsPlugin = require('npm-dts-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const stylesHandler = 'style-loader';
@@ -28,6 +28,7 @@ const config = {
     // new HtmlWebpackPlugin({
     //   template: 'index.html',
     // }),
+    new NpmDtsPlugin(),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       eslintPath: require.resolve('eslint'),
@@ -44,7 +45,6 @@ const config = {
       filename: 'css/index.css',
       chunkFilename: 'css/index.chunk,css',
     }),
-    // new TerserPlugin(),
     new CleanWebpackPlugin(),
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],

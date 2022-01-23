@@ -20,9 +20,9 @@
     "isolatedModules": false,
     "noEmit": false,
     "removeComments": true,
-    "baseUrl": "src",
-    "declaration": true,
-    "declarationDir": "types",
+    "baseUrl": ".",
+    "declaration": false,
+//    "declarationDir": "types",
     "jsx": "react-jsx",
     "paths": {
       "@": [
