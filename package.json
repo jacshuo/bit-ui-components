@@ -59,7 +59,7 @@
   },
   "files": [
     "dist",
-    "types",
+    "index.d.ts",
     "index.js",
     "README.md"
   ]
