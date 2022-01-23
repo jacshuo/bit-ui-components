@@ -9,7 +9,6 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const NpmDtsPlugin = require('npm-dts-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const stylesHandler = 'style-loader';
@@ -28,7 +27,6 @@ const config = {
     // new HtmlWebpackPlugin({
     //   template: 'index.html',
     // }),
-    new NpmDtsPlugin({entry: 'src/index.ts'}),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       eslintPath: require.resolve('eslint'),
@@ -57,6 +55,23 @@ const config = {
         use: ['ts-loader'],
       },
       {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'dts-loader',
+            options: {
+              name: 'bitui', // The name configured in ModuleFederationPlugin
+              // exposes: { // The exposes configured in ModuleFederationPlugin
+              //   './Counter': './src/modules/Counter/Counter.component.tsx',
+              // },
+              // Optional, default is '.wp_federation'
+              typesOutputDir: 'types',
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         use: [stylesHandler, 'css-loader'],
       },
@@ -80,18 +95,18 @@ const config = {
   },
   externals: {
     // Don't bundle react or react-dom
-    // 'react': {
-    //   commonjs: 'react',
-    //   commonjs2: 'react',
-    //   amd: 'React',
-    //   root: 'React',
-    // },
-    // 'react-dom': {
-    //   commonjs: 'react-dom',
-    //   commonjs2: 'react-dom',
-    //   amd: 'ReactDOM',
-    //   root: 'ReactDOM',
-    // },
+    'react': {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'React',
+      root: 'React',
+    },
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'ReactDOM',
+      root: 'ReactDOM',
+    },
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

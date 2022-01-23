@@ -22,7 +22,6 @@
     "removeComments": true,
     "baseUrl": ".",
     "declaration": false,
-//    "declarationDir": "types",
     "jsx": "react-jsx",
     "paths": {
       "@": [
@@ -30,6 +29,10 @@
       ],
       "src": [
         "src/*"
+      ],
+      "*": [
+        "*",
+        "types/*"
       ]
     }
   },
