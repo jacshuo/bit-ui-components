@@ -28,7 +28,7 @@ const config = {
     // new HtmlWebpackPlugin({
     //   template: 'index.html',
     // }),
-    new NpmDtsPlugin(),
+    new NpmDtsPlugin({entry: 'src/index.ts'}),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       eslintPath: require.resolve('eslint'),

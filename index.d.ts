@@ -157,6 +157,6 @@ declare module '@jacshuo/bitui/index' {
 
 }
 declare module '@jacshuo/bitui' {
-  import main = require('@jacshuo/bitui/index');
+  import main = require('@jacshuo/bitui/src/index');
   export = main;
 }
