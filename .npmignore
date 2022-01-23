@@ -1,3 +1,6 @@
 !./dist
+src/
+.babelrc
+webpack.config.js
 .idea/
 .vscode/

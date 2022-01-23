@@ -1,8 +1,5 @@
 import Typography from './components/General/Typography';
 
-
-const bitui = {
+export default {
   Typography,
 };
-
-export default bitui;

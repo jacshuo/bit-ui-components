@@ -28,27 +28,27 @@ const config = {
     // new HtmlWebpackPlugin({
     //   template: 'index.html',
     // }),
-    new TerserPlugin({
-      terserOptions: {
-        parse: {
-          ecma: 8,
-        },
-        compress: {
-          ecma: 5,
-          warnings: false,
-          comparisons: false,
-          inline: 2,
-        },
-        mangle: {
-          safari10: true,
-        },
-        output: {
-          ecma: 5,
-          comments: false,
-          ascii_only: true,
-        },
-      },
-    }),
+    // new TerserPlugin({
+    //   terserOptions: {
+    //     parse: {
+    //       ecma: 8,
+    //     },
+    //     compress: {
+    //       ecma: 5,
+    //       warnings: false,
+    //       comparisons: false,
+    //       inline: 2,
+    //     },
+    //     mangle: {
+    //       safari10: true,
+    //     },
+    //     output: {
+    //       ecma: 5,
+    //       comments: false,
+    //       ascii_only: true,
+    //     },
+    //   },
+    // }),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
       eslintPath: require.resolve('eslint'),
@@ -73,8 +73,8 @@ const config = {
       {
         test: /\.(ts|tsx)$/i,
         include: resolveApp('src'),
-        use: ['babel-loader', 'ts-loader'],
         exclude: ['/node_modules/'],
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/i,
@@ -83,6 +83,7 @@ const config = {
       {
         test: /\.s[ac]ss$/i,
         use: [
+          // stylesHandler,
           MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
@@ -96,6 +97,21 @@ const config = {
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
+  },
+  externals: {
+    // Don't bundle react or react-dom
+    'react': {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'React',
+      root: 'React',
+    },
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'ReactDOM',
+      root: 'ReactDOM',
+    },
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

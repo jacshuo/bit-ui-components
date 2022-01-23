@@ -1,4 +1,4 @@
-declare const bitui: {
+declare const _default: {
     Typography: {
         Text: import("react").FC<import("./components/General/Typography/Text").ITextProps>;
         Title: import("react").FC<import("./components/General/Typography/Title").ITitle>;
@@ -6,4 +6,4 @@ declare const bitui: {
         Paragraph: import("react").FC<import("./components/General/Typography/Paragraph").IParagraph>;
     };
 };
-export default bitui;
+export default _default;
